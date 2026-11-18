@@ -1,0 +1,2013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f9dce7">
+  <title>For My Mi Cielo ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #ffe0eb;
+      --bg-2: #fff5f8;
+      --bg-3: #fbd2df;
+      --blob-1: rgba(255, 166, 198, 0.55);
+      --blob-2: rgba(247, 196, 218, 0.50);
+      --blob-3: rgba(255, 218, 193, 0.48);
+      --accent: #d96c96;
+      --accent-hover: #bd557f;
+      --deep: #7f2d4f;
+      --text: #6a2844;
+      --muted: rgba(127, 45, 79, 0.72);
+      --card-bg: rgba(255, 255, 255, 0.76);
+      --card-border: rgba(255, 255, 255, 0.88);
+      --paper: #fffafc;
+      --paper-border: #f3c2d3;
+      --soft-panel: rgba(255, 240, 245, 0.82);
+      --shadow: 0 24px 64px rgba(164, 67, 104, 0.16);
+      --particle-1: #e68bad;
+      --particle-2: #f4a5c1;
+      --particle-3: #ffd1dc;
+    }
+
+    body[data-theme="sunset"] {
+      --bg-1: #ffe3d3;
+      --bg-2: #fff7f2;
+      --bg-3: #ffd2c4;
+      --blob-1: rgba(255, 179, 148, 0.55);
+      --blob-2: rgba(255, 206, 179, 0.50);
+      --blob-3: rgba(248, 165, 194, 0.45);
+      --accent: #d86c5c;
+      --accent-hover: #be5444;
+      --deep: #7b3228;
+      --text: #652a22;
+      --muted: rgba(123, 50, 40, 0.74);
+      --card-bg: rgba(255, 252, 249, 0.78);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --paper: #fffcf9;
+      --paper-border: #f3c8b9;
+      --soft-panel: rgba(255, 242, 234, 0.84);
+      --shadow: 0 24px 64px rgba(164, 88, 67, 0.16);
+      --particle-1: #f0937e;
+      --particle-2: #f7b7a3;
+      --particle-3: #ffe0cc;
+    }
+
+    body[data-theme="starlight"] {
+      --bg-1: #23152e;
+      --bg-2: #351e42;
+      --bg-3: #1b1025;
+      --blob-1: rgba(196, 107, 159, 0.36);
+      --blob-2: rgba(133, 98, 194, 0.34);
+      --blob-3: rgba(235, 152, 180, 0.25);
+      --accent: #e67aa5;
+      --accent-hover: #f293b9;
+      --deep: #ffeaf3;
+      --text: #f5d8e6;
+      --muted: rgba(245, 216, 230, 0.72);
+      --card-bg: rgba(42, 24, 56, 0.72);
+      --card-border: rgba(255, 210, 230, 0.18);
+      --paper: #2e1b3c;
+      --paper-border: rgba(230, 122, 165, 0.38);
+      --soft-panel: rgba(56, 33, 74, 0.76);
+      --shadow: 0 24px 64px rgba(8, 2, 16, 0.45);
+      --particle-1: #f4a4c4;
+      --particle-2: #c9a7eb;
+      --particle-3: #ffe4ef;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
+      transition: background 0.8s ease, color 0.5s ease;
+      overflow-x: hidden;
+    }
+
+    h1, h2, .serif {
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      color: var(--deep);
+    }
+
+    #fluidCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Top Floating Controls */
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 30;
+      width: min(94%, 820px);
+      margin: 12px auto 0;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .topbar-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--deep);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease, border-color 0.25s ease, color 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pill-btn:hover {
+      background: rgba(217, 108, 150, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .pill-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links.hidden { display: none; }
+
+    main {
+      position: relative;
+      z-index: 2;
+      width: min(94%, 800px);
+      margin: clamp(18px, 4vw, 36px) auto 40px;
+    }
+
+    .card {
+      padding: clamp(24px, 5vw, 48px);
+      text-align: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, background 0.6s ease;
+    }
+
+    .stage-enter {
+      animation: stageIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes stageIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .top-heart {
+      font-size: clamp(38px, 6vw, 52px);
+      display: inline-block;
+      animation: pulse 1.8s ease-in-out infinite;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 62px);
+      font-style: italic;
+      font-weight: 600;
+      margin: 10px 0 12px;
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-size: clamp(26px, 5vw, 36px);
+      font-style: italic;
+      font-weight: 600;
+      margin: 8px 0 12px;
+    }
+
+    p {
+      line-height: 1.8;
+      font-size: clamp(15px, 2.2vw, 17px);
+      margin: 0 0 14px;
+    }
+
+    .subtitle {
+      max-width: 570px;
+      margin: 16px auto 24px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(19px, 2.8vw, 22px);
+      line-height: 1.65;
+    }
+
+    .small {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .btn-primary, .song-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 26px;
+      margin: 8px 5px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(217, 108, 150, 0.28);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-primary:hover, .song-link:hover {
+      transform: translateY(-2px) scale(1.02);
+      background: var(--accent-hover);
+      box-shadow: 0 14px 28px rgba(217, 108, 150, 0.36);
+    }
+
+    .btn-primary:active, .song-link:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid var(--paper-border);
+      background: transparent;
+      color: var(--deep);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(217, 108, 150, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .input-wrap {
+      position: relative;
+      width: min(100%, 330px);
+      margin: 14px auto 6px;
+    }
+
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 14px 44px 14px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--paper-border);
+      background: rgba(255, 255, 255, 0.92);
+      color: #6a2844;
+      text-align: center;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(217, 108, 150, 0.16);
+    }
+
+    .toggle-pw {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: #8f4764;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .shake {
+      animation: shake 0.42s cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translateX(-3px); }
+      20%, 80% { transform: translateX(5px); }
+      30%, 50%, 70% { transform: translateX(-7px); }
+      40%, 60% { transform: translateX(7px); }
+    }
+
+    .hidden { display: none !important; }
+
+    .error {
+      min-height: 24px;
+      color: #c72c5e;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 6px 0;
+    }
+    body[data-theme="starlight"] .error { color: #ff8fb3; }
+
+    /* Interactive 3D Envelope */
+    .envelope-wrap {
+      margin: 26px auto 12px;
+      perspective: 900px;
+    }
+
+    .envelope {
+      width: 240px;
+      height: 156px;
+      margin: 18px auto;
+      position: relative;
+      border: 0;
+      border-radius: 12px;
+      background: #e98eae;
+      cursor: pointer;
+      box-shadow: 0 16px 34px rgba(164, 67, 104, 0.24);
+      overflow: visible;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .envelope:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 22px 42px rgba(164, 67, 104, 0.3);
+    }
+
+    .env-pocket {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .env-pocket::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-left: 120px solid #eea0bb;
+      border-right: 120px solid #e484a5;
+      border-top: 84px solid transparent;
+    }
+
+    .env-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 120px solid transparent;
+      border-right: 120px solid transparent;
+      border-top: 92px solid #f5b5ca;
+      transform-origin: top center;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .envelope.is-open .env-flap {
+      transform: rotateX(175deg);
+      z-index: 1;
+    }
+
+    .env-mini-paper {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      height: 112px;
+      background: #fffafc;
+      border-radius: 8px;
+      z-index: 1;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .envelope.is-open .env-mini-paper {
+      transform: translateY(-42px);
+    }
+
+    .seal {
+      position: relative;
+      z-index: 5;
+      font-size: 32px;
+      display: inline-block;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .envelope.is-open .seal {
+      transform: scale(0.75);
+      opacity: 0.7;
+    }
+
+    /* Love Letter */
+    .letter {
+      text-align: left;
+      padding: clamp(22px, 4vw, 34px);
+      margin: 24px auto 0;
+      max-width: 630px;
+      background: var(--paper);
+      border: 1.5px solid var(--paper-border);
+      border-radius: 20px;
+      box-shadow: 0 14px 36px rgba(164, 67, 104, 0.12);
+      animation: letterReveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes letterReveal {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .letter h2 { text-align: center; margin-top: 0; }
+    .letter p {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(18px, 2.5vw, 20.5px);
+      line-height: 1.75;
+      opacity: 0;
+      animation: fadeLine 0.7s ease forwards;
+    }
+    .letter p:nth-of-type(1) { animation-delay: 0.1s; }
+    .letter p:nth-of-type(2) { animation-delay: 0.25s; }
+    .letter p:nth-of-type(3) { animation-delay: 0.4s; }
+    .letter p:nth-of-type(4) { animation-delay: 0.55s; }
+    .letter p:nth-of-type(5) { animation-delay: 0.7s; }
+    .letter p:nth-of-type(6) { animation-delay: 0.85s; }
+
+    @keyframes fadeLine {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sign {
+      text-align: right;
+      font-style: italic;
+      margin-top: 22px;
+      margin-bottom: 0;
+    }
+
+    .section-divider {
+      margin-top: 34px;
+      padding-top: 28px;
+      border-top: 1px solid var(--paper-border);
+    }
+
+    /* Read-only Polaroid Gallery */
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .photo-card {
+      margin: 0;
+      background: #ffffff;
+      color: #6a2844;
+      padding: 10px 10px 16px;
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(164, 67, 104, 0.14);
+      transform: rotate(-1.2deg);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo-card:nth-child(even) {
+      transform: rotate(1.4deg);
+    }
+
+    .photo-card:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 38px rgba(164, 67, 104, 0.22);
+      z-index: 3;
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      background: #f9dce7;
+      aspect-ratio: 4/5;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-card video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #2b1822;
+    }
+
+    .video-frame {
+      position: relative;
+    }
+
+    .video-frame::after {
+      content: "▶";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 34px;
+      text-shadow: 0 2px 12px rgba(0,0,0,.6);
+      pointer-events: none;
+    }
+
+    /* Embedded (Mux) video player inside the gallery card */
+    .embed-frame {
+      background: #1b1018;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .embed-frame iframe {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 749 / 540;
+      border: 0;
+      border-radius: 4px;
+    }
+
+    #lightboxVideo {
+      display: block;
+      width: 100%;
+      max-height: 65vh;
+      border-radius: 10px;
+      background: #1b1018;
+    }
+
+    #lightboxVideo.hidden {
+      display: none !important;
+    }
+
+    #lightboxEmbed {
+      display: block;
+      width: 100%;
+      aspect-ratio: 749 / 540;
+      border: 0;
+      border-radius: 10px;
+      background: #1b1018;
+    }
+
+    #lightboxEmbed.hidden {
+      display: none !important;
+    }
+
+    .photo-card figcaption {
+      padding-top: 10px;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* Song Panel + Animated Equalizer */
+    .song-panel {
+      background: var(--soft-panel);
+      border: 1px solid var(--paper-border);
+      border-radius: 22px;
+      padding: 24px 20px;
+      margin-top: 28px;
+    }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 26px;
+      margin: 6px auto 12px;
+    }
+
+    .eq-bar {
+      width: 4px;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--accent);
+      animation: eqDance 1.1s ease-in-out infinite;
+    }
+
+    .eq-bar:nth-child(2) { animation-delay: 0.18s; }
+    .eq-bar:nth-child(3) { animation-delay: 0.36s; }
+    .eq-bar:nth-child(4) { animation-delay: 0.12s; }
+    .eq-bar:nth-child(5) { animation-delay: 0.44s; }
+
+    .eq-bars.paused .eq-bar {
+      animation-play-state: paused;
+      height: 6px;
+    }
+
+    @keyframes eqDance {
+      0%, 100% { height: 6px; opacity: 0.55; }
+      50% { height: 24px; opacity: 1; }
+    }
+
+    .heart-counter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--soft-panel);
+      border: 1px solid var(--paper-border);
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    /* Lightbox Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(24, 10, 20, 0.78);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(92vw, 460px);
+      background: #ffffff;
+      color: #6a2844;
+      padding: 14px 14px 20px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    .modal-card img {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .modal-caption {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 600;
+      margin: 14px 0 10px;
+    }
+
+    .modal-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--deep);
+      color: var(--bg-2);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      z-index: 80;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 560px) {
+      .topbar { border-radius: 20px; justify-content: center; }
+      .gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .photo-card { padding: 7px 7px 12px; }
+      .photo-card figcaption { font-size: 15px; }
+      .envelope { width: 210px; height: 140px; }
+      .env-pocket::before { border-left-width: 105px; border-right-width: 105px; border-top-width: 76px; }
+      .env-flap { border-left-width: 105px; border-right-width: 105px; border-top-width: 82px; }
+    }
+
+
+    /* ================================================================
+       MOBILE LAYOUT — tuned for narrow Android phones (including A50)
+       The page stays naturally scrollable; only individual components
+       adapt to the phone's available width and dynamic viewport height.
+       ================================================================ */
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    #fluidCanvas {
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    button, a, input {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, a {
+      touch-action: manipulation;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        position: sticky;
+        top: max(6px, env(safe-area-inset-top));
+        width: calc(100% - 20px);
+        margin: max(8px, env(safe-area-inset-top)) auto 0;
+        padding: 8px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        justify-content: initial;
+        gap: 8px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .topbar-group {
+        min-width: 0;
+        gap: 4px;
+      }
+
+      .topbar > .topbar-group:first-child {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        flex-wrap: nowrap;
+      }
+
+      .topbar > .topbar-group:last-child {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+        flex-wrap: nowrap;
+      }
+
+      .topbar .pill-btn {
+        min-width: 0;
+        min-height: 38px;
+        justify-content: center;
+        padding: 7px 5px;
+        font-size: clamp(10px, 2.9vw, 12px);
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      #chapterNav:not(.hidden) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4px;
+      }
+
+      #chapterNav.hidden {
+        display: none !important;
+      }
+
+      #chapterNav .pill-btn {
+        min-height: 36px;
+        padding: 7px 3px;
+        font-size: clamp(10px, 2.7vw, 12px);
+      }
+
+      main {
+        width: min(800px, calc(100% - 24px));
+        margin: 16px auto 30px;
+      }
+
+      .card {
+        padding: 26px 19px;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        font-size: clamp(35px, 9.5vw, 46px);
+        line-height: 1.06;
+      }
+
+      h2 {
+        font-size: clamp(25px, 6.8vw, 32px);
+        line-height: 1.12;
+      }
+
+      p {
+        font-size: 15.5px;
+        line-height: 1.7;
+      }
+
+      .subtitle {
+        max-width: 35rem;
+        margin: 14px auto 20px;
+        font-size: clamp(18px, 4.7vw, 21px);
+        line-height: 1.58;
+      }
+
+      .btn-primary,
+      .song-link,
+      .btn-ghost {
+        min-height: 44px;
+        max-width: 100%;
+        padding: 11px 17px;
+        font-size: 14px;
+        line-height: 1.25;
+        white-space: normal;
+        text-align: center;
+      }
+
+      .btn-primary,
+      .song-link {
+        padding: 12px 18px;
+      }
+
+      .input-wrap {
+        width: min(100%, 340px);
+      }
+
+      input[type="password"],
+      input[type="text"] {
+        min-height: 48px;
+        font-size: 16px;
+      }
+
+      .envelope-wrap {
+        margin: 22px auto 10px;
+      }
+
+      .envelope {
+        display: block;
+        width: min(240px, 78vw);
+        height: auto;
+        aspect-ratio: 20 / 13;
+        padding: 0;
+        overflow: visible;
+      }
+
+      .env-pocket::before {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 54%;
+        border: 0;
+        background: linear-gradient(105deg, #eea0bb 0 50%, #e484a5 50% 100%);
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+      }
+
+      .env-flap {
+        width: 100%;
+        height: 59%;
+        border: 0;
+        background: #f5b5ca;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+      }
+
+      .env-mini-paper {
+        left: 7%;
+        right: 7%;
+        bottom: 9%;
+        height: 72%;
+      }
+
+      .envelope.is-open .env-mini-paper {
+        transform: translateY(-27%);
+      }
+
+      .seal {
+        font-size: clamp(25px, 7.5vw, 32px);
+      }
+
+      .letter {
+        max-width: 100%;
+        margin-top: 20px;
+        padding: 21px 18px;
+        border-radius: 18px;
+        overflow-wrap: anywhere;
+      }
+
+      .letter p {
+        font-size: clamp(17px, 4.45vw, 19px);
+        line-height: 1.68;
+      }
+
+      .section-divider {
+        margin-top: 28px;
+        padding-top: 23px;
+      }
+
+      #letterSection,
+      #gallerySection,
+      #songSection,
+      #finaleSection {
+        scroll-margin-top: 145px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;        margin-top: 18px;
+      }
+
+      .photo-card,
+      .photo-card:nth-child(even) {
+        min-width: 0;
+        padding: 8px 8px 12px;
+        transform: none;
+      }
+
+      .photo-card:hover {
+        transform: none;
+      }
+
+      .photo-frame {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+      }
+
+      .photo-card figcaption {
+        min-height: 2.35em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 8px;
+        font-size: clamp(13px, 3.7vw, 16px);
+        line-height: 1.15;
+        text-align: center;
+        overflow-wrap: anywhere;
+      }
+
+      .song-panel {
+        margin-top: 24px;
+        padding: 21px 15px;
+        border-radius: 19px;
+      }
+
+      .song-panel > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .song-panel .song-link,
+      .song-panel .btn-ghost {
+        width: min(100%, 320px);
+        margin: 0;
+      }
+
+      .heart-counter-pill {
+        max-width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 9px 14px;
+      }
+
+      .modal-backdrop {
+        padding: max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom));
+      }
+
+      .modal-card {
+        width: min(100%, 460px);
+        max-height: calc(100vh - 24px);
+        max-height: calc(100dvh - 24px);
+        padding: 12px 12px 16px;
+        border-radius: 16px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .modal-card img {
+        max-height: min(58vh, 520px);
+        object-fit: contain;
+        background: #f9dce7;
+      }
+
+      .modal-caption {
+        margin: 11px 0 9px;
+        font-size: 21px;
+      }
+
+      .modal-controls {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .modal-controls button {
+        min-width: 0;
+        margin: 0 !important;
+        padding: 10px 5px !important;
+        font-size: 12px;
+      }
+
+      .toast {
+        bottom: max(12px, env(safe-area-inset-bottom));
+        width: min(max-content, calc(100vw - 24px));
+        padding: 11px 15px;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 1.35;
+      }
+
+      footer {
+        padding: 14px 8px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .topbar {
+        width: calc(100% - 16px);
+        padding: 7px;
+        gap: 6px;
+      }
+
+      .topbar .pill-btn {
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 10px;
+      }
+
+      main {
+        width: calc(100% - 16px);
+      }
+
+      .card {
+        padding: 23px 14px;
+        border-radius: 22px;
+      }
+
+      .gallery {
+        gap: 9px;
+      }
+
+      .photo-card,
+      .photo-card:nth-child(even) {
+        padding: 6px 6px 10px;
+      }
+
+      .photo-card figcaption {
+        font-size: 13px;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 520px) {
+      .topbar {
+        position: relative;
+        top: auto;
+      }
+
+      main {
+        margin-top: 12px;
+      }
+
+      .card {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      .modal-card {
+        max-height: calc(100vh - 16px);
+        max-height: calc(100dvh - 16px);
+      }
+
+      .modal-card img {
+        max-height: 42vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+  </style>
+</head>
+<body data-theme="rose">
+  <canvas id="fluidCanvas" aria-hidden="true"></canvas>
+
+  <header class="topbar" aria-label="Experience controls">
+    <div class="topbar-group" role="group" aria-label="Atmosphere theme">
+      <button class="pill-btn active" data-theme-btn="rose" type="button">🌸 Rose</button>
+      <button class="pill-btn" data-theme-btn="sunset" type="button">🌅 Sunset</button>
+      <button class="pill-btn" data-theme-btn="starlight" type="button">✨ Starlight</button>
+    </div>
+
+    <nav class="topbar-group nav-links hidden" id="chapterNav" aria-label="Jump to section">
+      <button class="pill-btn" data-scroll-target="letterSection" type="button">💌 Letter</button>
+      <button class="pill-btn" data-scroll-target="gallerySection" type="button">📸 Gallery</button>
+      <button class="pill-btn" data-scroll-target="songSection" type="button">🎶 Song</button>
+      <button class="pill-btn" data-scroll-target="finaleSection" type="button">💗 Finale</button>
+    </nav>
+
+    <div class="topbar-group">
+      <button class="pill-btn" id="soundToggle" type="button" aria-pressed="true">🔔 Chimes On</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Stage 1: Welcome -->
+    <section class="card stage-enter" id="welcome">
+      <div class="top-heart" id="welcomeHeart" title="Tap for sparkles">♡</div>
+      <h1>For My Mi Cielo</h1>
+      <p class="subtitle">
+        Dear Shreyanshi,<br><br>
+        I don't know what to say now. My feelings are too much,
+        but words fail to express them.<br><br>
+        I've just put in some effort and made something for my special one.
+        Just check it once, dear... 💗
+      </p>
+      <button class="btn-primary" id="openGateBtn" type="button">Open Your Surprise ♡</button>
+      <p class="small">A little fluid world made with love, just for you 🌸</p>
+    </section>
+
+    <!-- Stage 2: Secret Gate -->
+    <section class="card hidden" id="gate">
+      <div class="top-heart">🔐</div>
+      <h2>A Little Secret!</h2>
+      <p>Only someone special can enter this little world...</p>
+      <p>Enter our little secret word 💗</p>
+
+      <div class="input-wrap">
+        <input id="secretCode" type="password" placeholder="Your secret code..." autocomplete="off" aria-label="Secret code">
+        <button class="toggle-pw" id="togglePwBtn" type="button" aria-label="Show or hide secret code">👁️</button>
+      </div>
+
+      <div>
+        <button class="btn-primary" id="unlockBtn" type="button">Unlock My Surprise ♡</button>
+      </div>
+      <p class="error" id="error" aria-live="polite"></p>
+      <p class="small">Hint: two little words from the title (Mi Cielo) 😉</p>
+    </section>
+
+    <!-- Stage 3: Surprise Experience -->
+    <section class="card hidden" id="surprise">
+      <section id="letterSection">
+        <div class="top-heart">💌</div>
+        <h2>For You, My Mi Cielo ♡</h2>
+        <p>Before you read what's inside, there's one little thing...</p>
+        <p>Among the billion faces in this world, It is your Eyes I ever search for 💗</p>
+
+        <div class="envelope-wrap">
+          <p class="small" id="envelopePrompt">Tap the little envelope to open your letter</p>
+          <button class="envelope" id="envelopeBtn" type="button" aria-label="Open the letter" aria-expanded="false">
+            <span class="env-mini-paper"></span>
+            <span class="env-pocket"></span>
+            <span class="env-flap"></span>
+            <span class="seal">❤️</span>
+          </button>
+        </div>
+
+        <article id="loveLetter" class="letter hidden">
+          <h2>Dear Shreyanshi, ❤️</h2>
+          <p>
+            I honestly don't know where to begin. There are so many feelings
+            in my heart, and sometimes words just aren't enough to express them.
+          </p>
+          <p>
+            I made this little world for you because I wanted to do something
+            different, something that could make you smile and remind you
+            how special you are.
+          </p>
+          <p>
+            It's not about how perfect this little website is. It's about the
+            feelings, the time and the effort I've put into making something
+            just for my special one.
+          </p>
+          <p>
+            You deserve all the little happiness in the world, and I hope
+            this surprise brings a little smile to your face. 🌷
+          </p>
+          <p>
+            So, my Mi Cielo, keep exploring. There are more little surprises
+            waiting for you!
+          </p>
+          <p class="sign">With lots of love,<br>Harsh ❤️</p>
+        </article>
+      </section>
+
+      <section class="section-divider" id="gallerySection">
+        <h2>A little gallery of you 📸</h2>
+        <p class="small">Tap any photo to view it up close. A few favourite moments, kept together in one place. 🌸</p>
+        <div class="gallery" id="galleryGrid"></div>
+      </section>
+
+      <section class="song-panel" id="songSection">
+        <h2>One song for you 🎶</h2>
+        <div class="eq-bars" id="eqBars" aria-hidden="true">
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+          <span class="eq-bar"></span>
+        </div>
+        <p><strong>This song just says which I won't be able ever.... </strong></p>
+        <p class="small">A song chosen for you. Tap below to listen.</p>
+        <div>
+          <a class="song-link" href="https://youtu.be/DAYszemgPxc" target="_blank" rel="noopener noreferrer">Play the song ♡</a>
+          <button class="btn-ghost" id="melodyBtn" type="button">🎵 Play Soft Melody</button>
+        </div>
+      </section>
+
+      <section class="section-divider" id="finaleSection">
+        <h2>One last thing, Mann... 💗</h2>
+        <p>
+          "I like you.. You don't have to feel the same and I won't love you any less for it.
+
+           I just think you're too beautiful soul to leave these words unsaid.
+
+           Maybe God brought you into my life for a reason or maybe only for a season. 
+
+           I don't know what tomorrow holds.... So before it arrives,
+ 
+           I just wanted you to know that you became someone my heart is grateful to have met."
+        </p>
+        <p class="serif" style="font-size: clamp(22px, 4vw, 28px); font-style: italic; font-weight: 600;">
+          You make my world a little brighter. ♡
+        </p>
+        <div>
+          <button class="btn-primary" id="sendHeartBtn" type="button">Send a Little Heart 💗</button>
+        </div>
+        <div class="heart-counter-pill" id="heartCounterPill">
+          <span>💖</span>
+          <span id="heartCountText">0 hearts sent</span>
+        </div>
+        <p class="sign">Made with love, just for you.</p>
+      </section>
+    </section>
+
+    <footer>Made with care ♡ • Move your cursor or tap anywhere to ripple the sky</footer>
+  </main>
+
+  <!-- Photo Lightbox Modal -->
+  <div class="modal-backdrop hidden" id="lightboxModal" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption">
+    <div class="modal-card">
+      <img id="lightboxImg" src="" alt="Gallery photo">
+      <video id="lightboxVideo" class="hidden" controls playsinline preload="metadata"></video>
+      <iframe id="lightboxEmbed" class="hidden" title="Video player" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;" allowfullscreen></iframe>
+      <p class="modal-caption" id="lightboxCaption"></p>
+      <div class="modal-controls">
+        <button class="btn-ghost" id="prevPhotoBtn" type="button">← Prev</button>
+        <button class="btn-ghost" id="nextPhotoBtn" type="button">Next →</button>
+        <button class="btn-primary" id="closeLightboxBtn" type="button" style="padding: 9px 18px; margin: 0;">Close</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      // --- Default Gallery Data (supports local photos/photoX.jpg OR embedded artwork fallback) ---
+      const DEFAULT_PHOTOS = [
+        {
+          id: 0,
+          localSrc: "https://res.cloudinary.com/vlnigwm9/image/upload/f_auto,q_auto/fav_smile",
+          fallbackSrc: "photos/photo1.jpg",
+          alt: "A favourite picture of Shreyanshi",
+          caption: "My favourite smile ♡"
+        },
+        {
+          id: 1,
+          localSrc: "https://res.cloudinary.com/vlnigwm9/image/upload/f_auto,q_auto/overlod_cuteness",
+          fallbackSrc: "photos/photo2.jpg",
+          alt: "A lovely memory",
+          caption: "Overloaded cuteness"
+        },
+        {
+          id: 2,
+          localSrc: "https://res.cloudinary.com/vlnigwm9/image/upload/f_auto,q_auto/simply_special",
+          fallbackSrc: "photos/photo3.jpg",
+          alt: "A special moment",
+          caption: "Simply special 🌷"
+        },
+        {
+          id: 3,
+          localSrc: "https://res.cloudinary.com/vlnigwm9/image/upload/f_auto,q_auto/drama_queen",
+          fallbackSrc: "photos/photo4.jpg",
+          alt: "A treasured picture",
+          caption: "My Drama Queen"
+        },
+        {
+          id: 4,
+          localSrc: "https://res.cloudinary.com/kp8ba2qa/image/upload/f_auto,q_auto/1000175698",
+          fallbackSrc: "photos/photo4.jpg",
+          alt: "A treasured picture",
+          caption: "Heroinee 🛐"
+        },
+        {
+          id: 5,
+          type: "video",
+          // Mux-hosted video, embedded with the Mux player iframe.
+          embedSrc: "https://player.mux.com/L4MvoWk5HY01Z1dQv58VQMg1E4EPHkc8wvVj4Y1SQ00cg",
+          // Optional local MP4 backup (used only if embedSrc is empty).
+          localSrc: "video/video5.mp4",
+          // Optional online backup. Replace this with a direct MP4 URL if you have one.
+          remoteSrc: "",
+          alt: "A special video",
+          caption: "Edited for Mrignayani 👀"
+        }
+      ];
+
+      const EMBED_ALLOW = "accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;";
+
+      let heartCount = 0;
+      let activePhotoIndex = 0;
+      let soundEnabled = true;
+      let audioCtx = null;
+      let melodyTimer = null;
+      let isMelodyPlaying = false;
+
+      try {
+        const savedHearts = localStorage.getItem("mi_cielo_hearts_v1");
+        if (savedHearts) heartCount = parseInt(savedHearts, 10) || 0;
+      } catch (e) {
+        // Storage unavailable; continue with in-memory state
+      }
+
+      // --- Toast Notification ---
+      const toastEl = document.getElementById("toast");
+      let toastTimeout = null;
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toastEl.classList.remove("show"), 2600);
+      }
+
+      // --- Web Audio API Gentle Chimes ---
+      function ensureAudio() {
+        if (!soundEnabled) return null;
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (Ctx) audioCtx = new Ctx();
+        }
+        if (audioCtx && audioCtx.state === "suspended") {
+          audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+      }
+
+      function playChime(notes = [523.25, 659.25, 783.99], step = 0.09) {
+        const ctx = ensureAudio();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, now + idx * step);
+          gain.gain.setValueAtTime(0.0001, now + idx * step);
+          gain.gain.exponentialRampToValueAtTime(0.06, now + idx * step + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * step + 0.55);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * step);
+          osc.stop(now + idx * step + 0.6);
+        });
+      }
+
+      const soundToggle = document.getElementById("soundToggle");
+      soundToggle.addEventListener("click", () => {
+        soundEnabled = !soundEnabled;
+        soundToggle.textContent = soundEnabled ? "🔔 Chimes On" : "🔕 Muted";
+        soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+        if (!soundEnabled && isMelodyPlaying) stopMelody();
+        if (soundEnabled) playChime([659.25, 783.99], 0.07);
+      });
+
+      // --- Soft Ambient Melody Loop ---
+      const melodyBtn = document.getElementById("melodyBtn");
+      const eqBars = document.getElementById("eqBars");
+      eqBars.classList.add("paused");
+
+      const MELODY_NOTES = [523.25, 659.25, 783.99, 987.77, 783.99, 659.25, 587.33, 739.99];
+      let melodyStep = 0;
+
+      function stopMelody() {
+        isMelodyPlaying = false;
+        clearInterval(melodyTimer);
+        melodyTimer = null;
+        melodyBtn.textContent = "🎵 Play Soft Melody";
+        eqBars.classList.add("paused");
+      }
+
+      melodyBtn.addEventListener("click", () => {
+        if (isMelodyPlaying) {
+          stopMelody();
+          return;
+        }
+        if (!soundEnabled) {
+          soundEnabled = true;
+          soundToggle.textContent = "🔔 Chimes On";
+          soundToggle.setAttribute("aria-pressed", "true");
+        }
+        isMelodyPlaying = true;
+        melodyBtn.textContent = "⏸ Pause Melody";
+        eqBars.classList.remove("paused");
+        playChime([MELODY_NOTES[melodyStep % MELODY_NOTES.length]], 0);
+        melodyStep++;
+        melodyTimer = setInterval(() => {
+          if (!soundEnabled) { stopMelody(); return; }
+          playChime([MELODY_NOTES[melodyStep % MELODY_NOTES.length]], 0);
+          melodyStep++;
+        }, 520);
+      });
+
+      // --- Theme Switcher ---
+      const themeBtns = document.querySelectorAll("[data-theme-btn]");
+      themeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const theme = btn.getAttribute("data-theme-btn");
+          document.body.setAttribute("data-theme", theme);
+          themeBtns.forEach((b) => b.classList.toggle("active", b === btn));
+          playChime([587.33, 783.99], 0.06);
+        });
+      });
+
+      // --- Chapter Navigation ---
+      const chapterNav = document.getElementById("chapterNav");
+      document.querySelectorAll("[data-scroll-target]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.getAttribute("data-scroll-target");
+          const el = document.getElementById(targetId);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // --- Stage Transitions ---
+      const welcomeEl = document.getElementById("welcome");
+      const gateEl = document.getElementById("gate");
+      const surpriseEl = document.getElementById("surprise");
+      const secretInput = document.getElementById("secretCode");
+      const errorEl = document.getElementById("error");
+
+      document.getElementById("openGateBtn").addEventListener("click", () => {
+        welcomeEl.classList.add("hidden");
+        gateEl.classList.remove("hidden");
+        gateEl.classList.add("stage-enter");
+        playChime([523.25, 659.25], 0.08);
+        setTimeout(() => secretInput.focus(), 200);
+      });
+
+      document.getElementById("togglePwBtn").addEventListener("click", () => {
+        const isPw = secretInput.type === "password";
+        secretInput.type = isPw ? "text" : "password";
+      });
+
+      function unlockSurprise() {
+        const answer = secretInput.value.trim().toLowerCase();
+        if (answer === "mi cielo") {
+          errorEl.textContent = "";
+          gateEl.classList.add("hidden");
+          surpriseEl.classList.remove("hidden");
+          surpriseEl.classList.add("stage-enter");
+          chapterNav.classList.remove("hidden");
+          playChime([523.25, 659.25, 783.99, 1046.5], 0.08);
+          spawnBurst(window.innerWidth / 2, window.innerHeight / 3, 28);
+          showToast("Welcome to your little world, Mi Cielo ♡");
+        } else {
+          errorEl.textContent = "Oops! That's not our little secret. Try again, Mann! 💗";
+          secretInput.classList.remove("shake");
+          void secretInput.offsetWidth;
+          secretInput.classList.add("shake");
+          playChime([330, 293.66], 0.09);
+        }
+      }
+
+      document.getElementById("unlockBtn").addEventListener("click", unlockSurprise);
+      secretInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") unlockSurprise();
+      });
+
+      // --- Interactive 3D Envelope & Letter ---
+      const envelopeBtn = document.getElementById("envelopeBtn");
+      const loveLetter = document.getElementById("loveLetter");
+      const envelopePrompt = document.getElementById("envelopePrompt");
+      let letterOpen = false;
+
+      envelopeBtn.addEventListener("click", () => {
+        letterOpen = !letterOpen;
+        envelopeBtn.classList.toggle("is-open", letterOpen);
+        envelopeBtn.setAttribute("aria-expanded", String(letterOpen));
+        if (letterOpen) {
+          loveLetter.classList.remove("hidden");
+          envelopePrompt.textContent = "Tap the envelope again to fold it";
+          playChime([587.33, 739.99, 880], 0.09);
+          const rect = envelopeBtn.getBoundingClientRect();
+          spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 16);
+          setTimeout(() => {
+            loveLetter.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 260);
+        } else {
+          loveLetter.classList.add("hidden");
+          envelopePrompt.textContent = "Tap the little envelope to open your letter";
+        }
+      });
+
+      // --- Read-only Photo & Video Gallery ---
+      // Update shared media by replacing the files in your GitHub repository.
+      // Visitors do not get upload or change controls.
+      const galleryGrid = document.getElementById("galleryGrid");
+
+      function getMediaSrc(item) {
+        return item.localSrc || item.remoteSrc || "";
+      }
+
+      function attachVideoFallback(video, item) {
+        video.addEventListener("error", () => {
+          if (item.remoteSrc && video.dataset.triedRemote !== "yes") {
+            video.dataset.triedRemote = "yes";
+            video.src = item.remoteSrc;
+            video.load();
+          }
+        });
+      }
+
+      function renderGallery() {
+        galleryGrid.innerHTML = "";
+
+        DEFAULT_PHOTOS.forEach((item, idx) => {
+          const figure = document.createElement("figure");
+          figure.className = "photo-card";
+
+          const frame = document.createElement("div");
+          frame.className = "photo-frame";
+
+          if (item.type === "video" && item.embedSrc) {
+            // Embedded Mux player: plays right inside the card.
+            frame.classList.add("embed-frame");
+
+            const iframe = document.createElement("iframe");
+            iframe.src = item.embedSrc;
+            iframe.title = item.alt;
+            iframe.setAttribute("allow", EMBED_ALLOW);
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.loading = "lazy";
+
+            frame.appendChild(iframe);
+          } else if (item.type === "video") {
+            frame.classList.add("video-frame");
+
+            const video = document.createElement("video");
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.preload = "metadata";
+            video.setAttribute("aria-label", item.alt);
+            video.src = getMediaSrc(item);
+            attachVideoFallback(video, item);
+            video.addEventListener("loadeddata", () => {
+              video.play().catch(() => {});
+            }, { once: true });
+
+            frame.appendChild(video);
+          } else {
+            const img = document.createElement("img");
+            img.alt = item.alt;
+            img.loading = "lazy";
+            img.decoding = "async";
+            img.src = getMediaSrc(item);
+            img.addEventListener("error", () => {
+              if (item.fallbackSrc && img.src !== new URL(item.fallbackSrc, location.href).href) {
+                img.src = item.fallbackSrc;
+              }
+            }, { once: true });
+            frame.appendChild(img);
+          }
+
+          const caption = document.createElement("figcaption");
+          caption.textContent = item.caption;
+
+          figure.appendChild(frame);
+          figure.appendChild(caption);
+          figure.addEventListener("click", () => openLightbox(idx));
+          galleryGrid.appendChild(figure);
+        });
+      }
+
+      // Lightbox supports photos, local videos and embedded (Mux) videos.
+      const lightboxModal = document.getElementById("lightboxModal");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const lightboxVideo = document.getElementById("lightboxVideo");
+      const lightboxEmbed = document.getElementById("lightboxEmbed");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+
+      function clearEmbed() {
+        lightboxEmbed.classList.add("hidden");
+        lightboxEmbed.removeAttribute("src");
+      }
+
+      function updateLightbox() {
+        const item = DEFAULT_PHOTOS[activePhotoIndex];
+        lightboxCaption.textContent = item.caption;
+
+        if (item.type === "video" && item.embedSrc) {
+          lightboxImg.classList.add("hidden");
+          lightboxImg.removeAttribute("src");
+          lightboxVideo.pause();
+          lightboxVideo.classList.add("hidden");
+          lightboxVideo.removeAttribute("src");
+          lightboxVideo.load();
+          lightboxEmbed.classList.remove("hidden");
+          lightboxEmbed.src = item.embedSrc;
+        } else if (item.type === "video") {
+          clearEmbed();
+          lightboxImg.classList.add("hidden");
+          lightboxImg.removeAttribute("src");
+          lightboxVideo.classList.remove("hidden");
+          lightboxVideo.pause();
+          lightboxVideo.src = getMediaSrc(item);
+          lightboxVideo.load();
+          lightboxVideo.play().catch(() => {});
+          attachVideoFallback(lightboxVideo, item);
+        } else {
+          clearEmbed();
+          lightboxVideo.pause();
+          lightboxVideo.classList.add("hidden");
+          lightboxVideo.removeAttribute("src");
+          lightboxVideo.load();
+          lightboxImg.classList.remove("hidden");
+          lightboxImg.src = getMediaSrc(item);
+          lightboxImg.alt = item.alt;
+          lightboxImg.onerror = () => {
+            if (item.fallbackSrc) lightboxImg.src = item.fallbackSrc;
+          };
+        }
+      }
+
+      function openLightbox(idx) {
+        activePhotoIndex = idx;
+        updateLightbox();
+        lightboxModal.classList.remove("hidden");
+      }
+
+      function closeLightbox() {
+        lightboxVideo.pause();
+        clearEmbed();
+        lightboxModal.classList.add("hidden");
+      }
+
+      document.getElementById("prevPhotoBtn").addEventListener("click", () => {
+        activePhotoIndex = (activePhotoIndex - 1 + DEFAULT_PHOTOS.length) % DEFAULT_PHOTOS.length;
+        updateLightbox();
+      });
+
+      document.getElementById("nextPhotoBtn").addEventListener("click", () => {
+        activePhotoIndex = (activePhotoIndex + 1) % DEFAULT_PHOTOS.length;
+        updateLightbox();
+      });
+
+      document.getElementById("closeLightboxBtn").addEventListener("click", closeLightbox);
+      lightboxModal.addEventListener("click", (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (lightboxModal.classList.contains("hidden")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") {
+          activePhotoIndex = (activePhotoIndex - 1 + DEFAULT_PHOTOS.length) % DEFAULT_PHOTOS.length;
+          updateLightbox();
+        }
+        if (e.key === "ArrowRight") {
+          activePhotoIndex = (activePhotoIndex + 1) % DEFAULT_PHOTOS.length;
+          updateLightbox();
+        }
+      });
+
+      renderGallery();
+
+      // --- Heart Counter ---
+      const heartCountText = document.getElementById("heartCountText");
+      function updateHeartCounter() {
+        heartCountText.textContent = heartCount === 1 ? "1 heart sent" : `${heartCount} hearts sent`;
+      }
+      updateHeartCounter();
+
+      const sendHeartBtn = document.getElementById("sendHeartBtn");
+      sendHeartBtn.addEventListener("click", () => {
+        heartCount++;
+        try {
+          localStorage.setItem("mi_cielo_hearts_v1", String(heartCount));
+        } catch (err) {}
+        updateHeartCounter();
+        const rect = sendHeartBtn.getBoundingClientRect();
+        spawnBurst(rect.left + rect.width / 2, rect.top, 22);
+        playChime([659.25, 783.99, 1046.5], 0.06);
+      });
+
+      document.getElementById("welcomeHeart").addEventListener("click", (e) => {
+        const rect = e.target.getBoundingClientRect();
+        spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 14);
+        playChime([783.99, 1046.5], 0.06);
+      });
+
+      // --- Fluid & Interactive Particle Canvas Engine ---
+      const canvas = document.getElementById("fluidCanvas");
+      const ctx = canvas.getContext("2d");
+      let width = 0;
+      let height = 0;
+      let pointer = { x: -9999, y: -9999, vx: 0, vy: 0, active: false };
+      let time = 0;
+      const isCompactScreen = window.matchMedia("(max-width: 640px)").matches;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const particles = [];
+      const GLYPHS = ["♡", "♥", "✿", "✦"];
+
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, isCompactScreen ? 1.5 : 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function createParticle(x, y, burst = false) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = burst ? (1.6 + Math.random() * 4.2) : (0.3 + Math.random() * 0.7);
+        return {
+          x: x ?? Math.random() * width,
+          y: y ?? height + 20 + Math.random() * 80,
+          vx: burst ? Math.cos(angle) * speed : (Math.random() - 0.5) * 0.4,
+          vy: burst ? Math.sin(angle) * speed - 1.2 : -(0.45 + Math.random() * 0.85),
+          size: burst ? (14 + Math.random() * 14) : (12 + Math.random() * 14),
+          alpha: burst ? 0.95 : (0.22 + Math.random() * 0.35),
+          life: burst ? 1 : Infinity,
+          decay: burst ? (0.012 + Math.random() * 0.012) : 0,
+          rot: Math.random() * Math.PI * 2,
+          vRot: (Math.random() - 0.5) * 0.03,
+          glyph: GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+          colorIdx: Math.floor(Math.random() * 3)
+        };
+      }
+
+      function spawnBurst(x, y, count = 16) {
+        for (let i = 0; i < count; i++) {
+          particles.push(createParticle(x, y, true));
+        }
+      }
+
+      function initParticles() {
+        particles.length = 0;
+        for (let i = 0; i < (isCompactScreen ? 14 : 24); i++) {
+          const p = createParticle();
+          p.y = Math.random() * height;
+          particles.push(p);
+        }
+      }
+
+      window.addEventListener("pointermove", (e) => {
+        pointer.vx = e.clientX - pointer.x;
+        pointer.vy = e.clientY - pointer.y;
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        pointer.active = true;
+      });
+
+      window.addEventListener("pointerdown", (e) => {
+        if (e.target.closest("button, a, input, .photo-card, .modal-card")) return;
+        spawnBurst(e.clientX, e.clientY, 10);
+      });
+
+      window.addEventListener("resize", resizeCanvas, { passive: true });
+      window.addEventListener("orientationchange", () => requestAnimationFrame(resizeCanvas), { passive: true });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", resizeCanvas, { passive: true });
+      }
+
+      function getThemeColors() {
+        const styles = getComputedStyle(document.body);
+        return {
+          blobs: [
+            styles.getPropertyValue("--blob-1").trim(),
+            styles.getPropertyValue("--blob-2").trim(),
+            styles.getPropertyValue("--blob-3").trim()
+          ],
+          particles: [
+            styles.getPropertyValue("--particle-1").trim(),
+            styles.getPropertyValue("--particle-2").trim(),
+            styles.getPropertyValue("--particle-3").trim()
+          ]
+        };
+      }
+
+      function drawFluidWave(blobColor, offset, amp, freq, yRatio) {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        const step = Math.max(24, Math.floor(width / 28));
+        for (let x = 0; x <= width + step; x += step) {
+          const distToPointer = pointer.active ? Math.hypot(x - pointer.x, height * yRatio - pointer.y) : 999;
+          const ripple = distToPointer < 220 ? Math.sin(distToPointer * 0.04 - time * 4) * (220 - distToPointer) * 0.14 : 0;
+          const y = height * yRatio +
+            Math.sin(x * freq + time + offset) * amp +
+            Math.cos(x * freq * 0.55 - time * 0.8 + offset) * (amp * 0.5) +
+            ripple;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fillStyle = blobColor;
+        ctx.fill();
+      }
+
+      let rafId = null;
+      function animate() {
+        time += 0.014;
+        ctx.clearRect(0, 0, width, height);
+
+        const colors = getThemeColors();
+
+        // Flowing liquid ribbons
+        drawFluidWave(colors.blobs[0], 0.0, 38, 0.0032, 0.58);
+        drawFluidWave(colors.blobs[1], 2.1, 44, 0.0026, 0.70);
+        drawFluidWave(colors.blobs[2], 4.2, 32, 0.0038, 0.82);
+
+        // Soft glowing orb following cursor
+        if (pointer.active && pointer.x > 0) {
+          const grad = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 140);
+          grad.addColorStop(0, colors.blobs[0]);
+          grad.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(pointer.x, pointer.y, 140, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Fluid particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          // Gentle curl drift
+          p.vx += Math.sin(time + p.y * 0.01) * 0.008;
+
+          // Pointer swirl interaction
+          if (pointer.active) {
+            const dx = p.x - pointer.x;
+            const dy = p.y - pointer.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 130 && dist > 1) {
+              const force = (130 - dist) / 130;
+              p.vx += (dx / dist) * force * 0.25 + pointer.vx * 0.012;
+              p.vy += (dy / dist) * force * 0.25 + pointer.vy * 0.012;
+            }
+          }
+
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vRot;
+
+          if (p.decay > 0) {
+            p.life -= p.decay;
+            p.vy += 0.04; // gentle gravity on burst
+            p.vx *= 0.985;
+            if (p.life <= 0) {
+              particles.splice(i, 1);
+              continue;
+            }
+          } else {
+            p.vx *= 0.99;
+            if (p.y < -40) {
+              p.y = height + 30;
+              p.x = Math.random() * width;
+            }
+            if (p.x < -30) p.x = width + 20;
+            if (p.x > width + 30) p.x = -20;
+          }
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.globalAlpha = p.decay > 0 ? Math.max(0, p.alpha * p.life) : p.alpha;
+          ctx.fillStyle = colors.particles[p.colorIdx];
+          ctx.font = `${p.size}px Georgia, serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(p.glyph, 0, 0);
+          ctx.restore();
+        }
+
+        pointer.vx *= 0.85;
+        pointer.vy *= 0.85;
+        if (!prefersReducedMotion && !document.hidden) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          rafId = null;
+        }
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          if (rafId !== null) cancelAnimationFrame(rafId);
+          rafId = null;        } else if (!prefersReducedMotion && rafId === null) {
+          animate();
+        }
+      });
+
+      window.addEventListener("load", () => {
+        resizeCanvas();
+        initParticles();
+        if (rafId) cancelAnimationFrame(rafId);
+        animate();
+      });
+    })();
+  </script>
+</body>
+</html>
